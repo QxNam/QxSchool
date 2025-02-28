@@ -1,0 +1,36 @@
+{
+  "name": "QxSchool - IUH",
+  "description": "Toolkit for IUHer",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_title": "QxSchool - IUH"
+  },
+  "icons": {
+    "16": "assets/images/icon-16.png",
+    "32": "assets/images/icon-32.png",
+    "48": "assets/images/icon-48.png",
+    "128": "assets/images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/popup/js/score.js",
+        "src/popup/js/print.js",
+        "src/popup/js/mod.js",
+        "src/popup/js/survey.js"
+      ],
+      "matches": [
+        "https://sv.iuh.edu.vn/ket-qua-hoc-tap.html",
+        "https://sv.iuh.edu.vn/sinh-vien/chi-tiet-phieu-khao-sat.html",
+        "https://sv.iuh.edu.vn/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}

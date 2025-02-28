@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-size: 18px;
+            font-family: "Arial";
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Just be yourself, fighting!</h3>
+        <p>I promise your data is always safe.</p>
+        <p>Hope you have a great experience. Thanks!</p>
+        <div class="box-feedback" style="display: flex; align-items: center;">
+            <!-- Icon gửi bên trái -->
+            <div>
+                <a href="mailto:quachnam311@gmail.com" target="_blank" style="text-decoration: none; color: black;">
+                    <img onclick="sendFeedback()" src="../../../assets/mail.png" alt="Send Feedback" style="width: 40px; height: 40px; cursor: pointer;">
+                </a>
+            </div>
+            <div>
+                <span>quachnam311@gmail.com</span>
+            </div>
+    
+            <!-- Textarea bên phải
+            <div>
+                <textarea id="feedback" rows="8" cols="40" placeholder="Enter your feedback here..."></textarea>
+            </div> -->
+        </div>    
+    </div>
+</body>
+</html>

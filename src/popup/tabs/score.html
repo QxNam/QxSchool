@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Score - Tab 1</title>
+  <!-- <link rel="stylesheet" href="../css/styles.css"> -->
+  <link rel="stylesheet" href="../css/score-btn.css">
+  <style>
+    .score-container {
+      padding: 20px;
+      text-align: left;
+      font-family: "Arial";
+    }
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body style="background-color: rgb(172, 191, 208);">
+  <h1>Score Tools</h1>
+  <div class="screen-container">
+    <div class="score-container">
+      <label class="checkbox-label" for="toggle-checkbox">
+        <input type="checkbox" id="toggle-checkbox" data-state="off" checked style="--s:20px">
+        <span>Display Full</span>
+        </label>
+    </div>
+    <div class="score-container">
+      <label class="checkbox-label" for="mod-checkbox">
+        <input type="checkbox" id="mod-checkbox" data-state="off"  checked style="--s:20px">
+        <span>Modify</span>
+      </label>
+    </div>
+    <div class="print" style="text-align: center; padding-top: 20px;">
+      <!-- <button id="printBtn"> -->
+        <img  id="printBtn" src="../../../assets/print.png" alt="Print" style="width: 50px; height: 50px;">
+      <!-- </button> -->
+    </div>
+
+  </div>
+  <script src="../js/print.js"></script>
+  <script src="../js/score.js"></script>
+  <script src="../js/mod.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* Reset margin, padding và font mặc định */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial";
+}
+
+/* Container chính của popup */
+.popup-container {
+  display: flex;
+  width: 600px;  /* Điều chỉnh kích thước theo ý muốn */
+  height: 400px; /* Điều chỉnh kích thước theo ý muốn */
+  background-color: #ddd;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); */
+}
+
+/* Sidebar chứa các tab */
+.sidebar {
+  width: 180px;
+  background-color: #f5f5f5;
+  overflow-y: auto; /* Cho phép cuộn dọc nếu nhiều tab */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Mỗi tab */
+.tab {
+  font-size: medium;
+  padding: 10px;
+  margin-bottom: 5px;
+  cursor: pointer;
+  background-color: #ddd;
+  border-radius: 4px;
+  text-align: left;
+  transition: background-color 0.3s;
+}
+
+.tab:hover {
+  background-color: #ccc;
+}
+
+/* Tab được chọn */
+.tab.active {
+  background-color: #7ff27f;
+}
+
+/* Phần nội dung chính */
+.main-content {
+  flex: 1;
+  padding: 10px;
+  border-left: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Panel nội dung cho mỗi tab */
+.content-panel {
+  display: block;
+}
+
+.tab-logo {
+  width: 20px;
+  height: 20px;
+  margin: 0 auto;
+}
+
+.footer {
+  padding: 0px;
+  text-align: center;
+  font-size: medium;
+  background-color: #f5f5f5;
+  font-family: "monospace";
+}
+
+.nav-left {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* hoặc một giá trị chiều cao phù hợp */
+}
+
+.sidebar {
+  flex: 1;
+  overflow-y: auto; /* cho phép cuộn nếu nội dung vượt quá */
+}

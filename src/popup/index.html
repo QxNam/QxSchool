@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>QxSchool - IUH</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Sidebar chứa các tab -->
+    <div class="nav-left">
+      <div class="sidebar">
+        <div class="logo", style="display: flex; justify-content: center; padding-bottom: 5px;">
+          <a href="https://sv.iuh.edu.vn/dashboard.html" target="_blank">
+            <img style="height: 48px; width: 50px;" src="../../assets/iuh.png" alt="QxSchool - IUH">
+          </a>
+        </div>
+        <div class="tab active" data-tab="score.html"><img class="tab-logo" src="../../assets/score.png"> Score</div>
+        <div class="tab" data-tab="survey.html"><img class="tab-logo" src="../../assets/servey.png"> Bp Survey</div>
+        <div class="tab" data-tab="recaptcha.html"><img class="tab-logo" src="../../assets/recaptcha.svg"> Bp Captcha</div>
+      </div>
+
+      <div class="tab footer" data-tab="information.html">
+        <p style="font-size: 14px;"><sup>v1.0.0</sup><img class="tab-logo" src="../../assets/author.png">QxSchool-IUH</p>
+      </div>
+    </div>
+    
+    <!-- Main content: sử dụng iframe để render giao diện của file HTML được chọn -->
+    <div class="main-content">
+      <iframe id="contentFrame" src="tabs/score.html" frameborder="o" style="width: 100%; height: 100%;"></iframe>
+    </div>
+  </div>
+  <script src="js/menu.js"></script>
+</body>
+</html>
