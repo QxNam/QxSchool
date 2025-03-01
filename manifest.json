@@ -1,7 +1,7 @@
 {
   "name": "QxSchool - IUH",
   "description": "Toolkit for IUHer",
-  "version": "1.0",
+  "version": "1.0.0",
   "manifest_version": 3,
   "action": {
     "default_popup": "src/popup/index.html",

@@ -1,0 +1,1 @@
+zip -r QxSchool-IUH-v1.0.0.zip manifest.json assets src
