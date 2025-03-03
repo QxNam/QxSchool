@@ -99,7 +99,7 @@ function getScore(row, col) {
   // Kiểm tra xem phần tử có tồn tại hay không
   if (node && node.innerText.trim() !== "") {
     // Chuyển giá trị của innerText thành số thực
-    const value = parseFloat(node.innerText);
+    const value = parseFloat(node.innerText.replace(',', '.').trim());
 
     // Kiểm tra nếu giá trị có thể chuyển thành số thực hợp lệ
     if (!isNaN(value)) {
@@ -175,12 +175,9 @@ function cvt_10_tl(s) {
   if (s < 4) return "Kém 😱";
   else if (s < 5) return "Trung bình yếu 😰";
   else if (s < 6.5) return "Trung bình 😚";
-  else if (s < 7.5) return `Khá 😏
-  Bạn đã rất cố gắng rồi 🚩`;
-  else if (s < 9) return `Giỏi 🫡
-  May mà có 💰💰`;
-  else return `Xuất sắc 🥳
-  XIN NHẸ CÁI HỌC BỔNG 💰💰`;
+  else if (s < 7.5) return `Khá 😏`;
+  else if (s < 9) return `Giỏi 🫡`;
+  else return `Xuất sắc 🥳`;
 }
 
 function caculateScore(row) {
@@ -252,6 +249,10 @@ function getScoreCurrent(init=true) {
   }
 }
 
+function displayScore(score, f=2) {
+  return score.toFixed(f).replace(".", ",")
+}
+
 function updateNewScore() {
   const rows = document.evaluate('//*[@id="xemDiem_aaa"]/tbody/tr', document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
   startIndex = getScoreCurrent(init=false)+6;
@@ -285,37 +286,59 @@ function updateNewScore() {
   // Cập nhật điểm 10, điểm 4, điểm chữ, xếp loại và ghi chú trong bảng
   let target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-3}]/td[1]/span[2]`);
   if (target) {
-    target.innerText = " " + tbhk_10.toFixed(2);
+    if (ttc_cur!=0){
+      target.innerText = " " + displayScore(tbhk_10);
+    }
+    else {
+      target.innerText = " ?";
+    }
+    target.style.fontWeight = "bold";
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-3}]/td[2]/span[2]`);
   if (target) {
-    target.innerText = " " + tbhk_4.toFixed(2);
+    if (ttc_cur!=0){
+      target.innerText = " " + displayScore(tbhk_4);
+    }
+    else {
+      target.innerText = " ?";
+    }
+    target.style.fontWeight = "bold";
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-2}]/td[1]/span[2]`);
   if (target) {
-    target.innerText = " " + tbtl_10.toFixed(2);
+    target.innerText = " " + displayScore(tbtl_10);
+    target.style.fontWeight = "bold";
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-2}]/td[2]/span[2]`);
   if (target) {
-    target.innerText = " " + tbtl_4.toFixed(2);
+    target.innerText = " " + displayScore(tbtl_4);
+    target.style.fontWeight = "bold";
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-1}]/td[1]/span[2]`);
   if (target) {
-    target.innerText = " " + (ttc + lastScore['ttc']).toFixed(0);
+    target.innerText = " " + displayScore(ttc + lastScore['ttc'], 0);
+    target.style.fontWeight = "bold";
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-1}]/td[2]/span[2]`);
   if (target) {
-    target.innerText = " " + (ttc_cur + lastScore['ttc']).toFixed(0);
+    target.innerText = " " + displayScore(ttc_cur + lastScore['ttc'], 0);
+    target.style.fontWeight = "bold";
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n}]/td[1]/span[2]`);
   if (target) {
     target.innerText = " " + cvt_10_tl(tbtl_10);
+    target.style.fontWeight = "bold";
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n}]/td[2]/span[2]`);
   if (target) {
-    target.innerText = " " + cvt_10_tl(tbhk_10);
+    if (ttc_cur!=0){
+      target.innerText = " " + cvt_10_tl(tbhk_10);
+    }
+    else {
+      target.innerText = " ?";
+    }
+    target.style.fontWeight = "bold";
   }
-  // console.log(tbhk_10, tbtl_10, tbhk_4, tbtl_4);
 }
 
 function init_score() {
@@ -325,7 +348,6 @@ function init_score() {
   
   // Kiểm tra xem có kết quả nào không
   if (rows.snapshotLength === 0) {
-    console.log("Không tìm thấy thẻ tr trong tbody của bảng.");
     return;
   }
   
@@ -372,7 +394,6 @@ function init_score() {
 
   // Kiểm tra nếu không tìm thấy lastRow
   if (!lastRow) {
-    console.log("Không tìm thấy hàng cuối cùng trong tbody.");
     return;
   }
 
@@ -395,6 +416,19 @@ function removeInit() {
     }
   }
 }
+
+function removeElement() {
+  const elToRemove = getElementByXPath('//*[@id="xemDiem_aaa_wrapper"]/div/div[3]');
+  if (elToRemove && !removedElementData) {
+    removedElementData = {
+      element: elToRemove,
+      parent: elToRemove.parentNode,
+      nextSibling: elToRemove.nextSibling
+    };
+    elToRemove.remove();
+  }
+}
+
 // -------------------------------------------------------------------
 
 // Hàm xử lý khi người dùng click vào ô (td)
@@ -414,20 +448,27 @@ function cellClickHandler(event) {
 
     // Khi mất focus, kiểm tra giá trị nhập vào
     input.addEventListener("blur", function() {
-      const value = parseFloat(this.value);
+      const value = parseFloat(this.value.replace(',', '.'));
       // const value = getScoreCurrent(init=false)+6;
+      const span = document.createElement('span');
       if (!isNaN(value) && value >= 0 && value <= 10) {
-        cell.innerText = this.value;
-        cell.style.background = "lightblue";
+        // cell.innerText = displayScore(value);
+        // cell.style.background = "lightblue";
+        span.innerText = displayScore(value);
+        span.style.background = color['B'];
+        span.style.padding = "4px 6px";
+        span.style.border = "1px solid #191970";
       } else {
-        cell.innerText = "";
-        cell.style.background = "white";
+        span.innerText = "";
+        span.style.background = "white";
       }
+      // Xóa nội dung cũ của cell và chèn span vào
+      cell.innerHTML = "";
+      cell.appendChild(span);
 
-      // Lấy XPath của ô vừa nhập
+      // Tính toán điểm và hiển thị
       const xpath = getXPath(cell);
       const ck_score = getScore(xpath[0], 21);
-      // const allowedRow = getCK();
       const startIndex = getScoreCurrent(init=false)+6;
       if (ck_score !== null && startIndex <= xpath[0]) {
         let sc = caculateScore(xpath[0]);
@@ -435,38 +476,33 @@ function cellClickHandler(event) {
         // diem 10
         let temp = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${xpath[0]}]/td[22]`);
         if (temp) {
-          temp.innerText = sc.toFixed(1) + "0";  // Chèn kết quả vào ô
+          temp.innerText = displayScore(sc);
           temp.style.background = color[chr[1]];
         }
         // diem 4
         temp = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${xpath[0]}]/td[23]`);
         if (temp) {
-          temp.innerText = charScore[chr[0]];  // Chèn kết quả vào ô
+          temp.innerText = displayScore(charScore[chr[0]]);
           temp.style.background = color[chr[1]];
         }
         // diem chu
         temp = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${xpath[0]}]/td[24]`);
         if (temp) {
-          temp.innerText = chr[0];  // Chèn kết quả vào ô
+          temp.innerText = chr[0];
           temp.style.background = color[chr[1]];
         }
         // rank
         temp = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${xpath[0]}]/td[25]`);
         if (temp) {
-          temp.innerText = rank[chr[0]];  // Chèn kết quả vào ô
+          temp.innerText = rank[chr[0]];
           temp.style.background = color[chr[1]];
         }
         // note
         temp = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${xpath[0]}]/td[26]`);
         if (temp) {
-          temp.innerText = chr[0] == "F" ? "Học Lại 🧧" : "🚀";  // Chèn kết quả vào ô
+          temp.innerText = chr[0] == "F" ? "Học Lại 🧧" : "🚀";
           temp.style.background = color[chr[1]];
         }
-        // tin chi
-        // temp = getValue(`//*[@id="xemDiem_aaa"]/tbody/tr[${xpath[0]}]/td[4]/div`);
-        // if (temp) {
-        //   ttc += temp;
-        // }
       }
       if (ck_score === null) {
         // diem 10
@@ -529,6 +565,7 @@ function detachCellListeners() {
 chrome.storage.sync.get(["modifyEnabled"], function(result) {
   if (result.modifyEnabled) {
     editingEnabled = true;
+    removeElement();
     attachCellListeners();
     init_score();
     updateNewScore();
@@ -540,6 +577,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if (request.action === "toggleModify") {
     editingEnabled = request.enabled;
     if (editingEnabled) {
+      removeElement();
       attachCellListeners();
       init_score();
       updateNewScore();
