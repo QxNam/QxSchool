@@ -19,18 +19,23 @@
         "src/popup/js/score.js",
         "src/popup/js/print.js",
         "src/popup/js/mod.js",
-        "src/popup/js/survey.js"
+        "src/popup/js/survey.js",
+        "src/popup/js/recaptcha.js"
       ],
       "matches": [
+        "https://sv.iuh.edu.vn/*",
+        "https://sv.iuh.edu.vn/sinh-vien/*",
+        "https://sv.iuh.edu.vn/sinh-vien/danh-sach-khao-sat.html",
         "https://sv.iuh.edu.vn/ket-qua-hoc-tap.html",
-        "https://sv.iuh.edu.vn/sinh-vien/chi-tiet-phieu-khao-sat.html",
-        "https://sv.iuh.edu.vn/*"
+        "https://sv.iuh.edu.vn/sinh-vien-dang-nhap.html"
       ],
       "run_at": "document_end"
     }
   ],
   "permissions": [
+    "scripting",
     "storage",
-    "tabs"
+    "tabs",
+    "contextMenus"
   ]
 }

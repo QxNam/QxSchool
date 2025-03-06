@@ -3,27 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Survey</title>
     <link rel="stylesheet" href="../css/survey-btn.css">
+    <link rel="stylesheet" href="../css/score-btn.css">
+    <link rel="stylesheet" href="../css/processbar.css">
     <style>
         .container {
             display: flex;
-            justify-content: center;
+            /* justify-content: center; */
             align-items: center;
-            height: 50vh;
+            height: 60vh;
             font-size: 18px;
             font-family: "Arial";
+            flex-direction: column;
+        }
+        #progressContainer {
+            margin-top: 20px;
         }
     </style>
 </head>
-<body>
+<body style="background-color:#fdd098;">
     <h1>Bypass Survey</h1>
-
-    <div class="container">
-        <div ontouchstart="">
-            <div class="button" id="btnSurvey">
-                <a href="#">RUN</a>
+    <div class="screen-container">
+        <div class="container">
+            <div ontouchstart="">
+                <div class="button" id="btnSurvey">
+                    <a href="#">RUN</a>
+                </div>
             </div>
+            <!-- <div ontouchstart="">
+                <div class="button" id="btnSurveyAuto">
+                    <a href="#">AUTO</a>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="alert">
+            <!-- <div class="range" style="--p:60">
+                <div class="range__label">Progress</div>
+            </div> -->
         </div>
     </div>
 

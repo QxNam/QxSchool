@@ -15,6 +15,7 @@ input {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  border: 2px solid rgb(196, 4, 4);
 }
 input:before{
   content: "";
@@ -30,7 +31,8 @@ input:before{
     padding cubic-bezier(0,calc(var(--_i,-1)*200),1,calc(var(--_i,-1)*200)) .25s .1s;
 }
 input:checked {
-  background-color: #85ff7a;
+  background-color: #68f35c;
+  border: 2px solid #0fb400;
 }
 input:checked:before {
   padding: calc(var(--s)/10 + .05px) calc(var(--s)/10);

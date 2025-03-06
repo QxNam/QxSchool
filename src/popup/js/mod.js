@@ -253,11 +253,24 @@ function displayScore(score, f=2) {
   return score.toFixed(f).replace(".", ",")
 }
 
+function compareScore(newScore, oldScore) {
+  if (!newScore) {
+    return "";
+  }
+  if (newScore > oldScore) {
+    return `<span style="color: green; font-weight: normal;"> +${(newScore - oldScore).toFixed(2)}</span>`;
+  }
+  else if (newScore < oldScore) {
+    return `<span style="color: red; font-weight: normal;"> -${(oldScore - newScore).toFixed(2)}</span>`;
+  }
+}
+
 function updateNewScore() {
   const rows = document.evaluate('//*[@id="xemDiem_aaa"]/tbody/tr', document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
   startIndex = getScoreCurrent(init=false)+6;
   endIndex = rows.snapshotLength - 4;
   // tinh diem
+  let hasNewScore = false;
   let tbhk_10 = 0;
   let tbhk_4 = 0;
   let tbtl_10 = lastScore['tbtl_10'];
@@ -269,6 +282,7 @@ function updateNewScore() {
     const tc = getValue(`//*[@id="xemDiem_aaa"]/tbody/tr[${i}]/td[4]/div`);
     const score = getScore(i, 22);
     if (score !== null) {
+      hasNewScore = true;
       total_score += score*tc;
       ttc_cur += tc;
     }
@@ -288,6 +302,7 @@ function updateNewScore() {
   if (target) {
     if (ttc_cur!=0){
       target.innerText = " " + displayScore(tbhk_10);
+      // target.innerHTML = ` ${displayScore(tbhk_10)} ${hasNewScore ? compareScore(tbhk_10, lastScore['tbhk_10']) : "" }`;
     }
     else {
       target.innerText = " ?";
@@ -298,6 +313,7 @@ function updateNewScore() {
   if (target) {
     if (ttc_cur!=0){
       target.innerText = " " + displayScore(tbhk_4);
+      // target.innerHTML = ` ${displayScore(tbhk_4)} ${hasNewScore ? compareScore(tbhk_4, lastScore['tbhk_4']) : "" }`;
     }
     else {
       target.innerText = " ?";
@@ -306,13 +322,16 @@ function updateNewScore() {
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-2}]/td[1]/span[2]`);
   if (target) {
-    target.innerText = " " + displayScore(tbtl_10);
+    s = lastScore['tbtl_10'] - tbtl_10
+    // target.innerText = " " + displayScore(tbtl_10);
     target.style.fontWeight = "bold";
+    target.innerHTML = ` ${displayScore(tbtl_10)} ${hasNewScore ? compareScore(tbtl_10, lastScore['tbtl_10']) : "" }`;
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-2}]/td[2]/span[2]`);
   if (target) {
-    target.innerText = " " + displayScore(tbtl_4);
+    // target.innerText = " " + displayScore(tbtl_4);
     target.style.fontWeight = "bold";
+    target.innerHTML = ` ${displayScore(tbtl_4)} ${hasNewScore ? compareScore(tbtl_4, lastScore['tbtl_4']) : "" }`;
   }
   target = getElementByXPath(`//*[@id="xemDiem_aaa"]/tbody/tr[${n-1}]/td[1]/span[2]`);
   if (target) {
