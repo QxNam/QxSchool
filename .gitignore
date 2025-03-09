@@ -1,0 +1,3 @@
+model/*.ipynb
+.DS_Store
+venv
